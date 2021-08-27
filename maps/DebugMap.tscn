@@ -1,0 +1,45 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://icon.png" type="Texture" id=1]
+[ext_resource path="res://entities/Car.tscn" type="PackedScene" id=2]
+
+[sub_resource type="SpatialMaterial" id=1]
+albedo_texture = ExtResource( 1 )
+uv1_triplanar = true
+
+[sub_resource type="CubeMesh" id=2]
+material = SubResource( 1 )
+size = Vector3( 2000, 2, 2000 )
+
+[sub_resource type="ConvexPolygonShape" id=3]
+points = PoolVector3Array( -1000, 1, 1000, 1000, 1, -1000, 1000, 1, 1000, -1000, 1, -1000, -1000, -1, 1000, 1000, -1, -1000, 1000, -1, 1000, -1000, -1, -1000, 1000, 1, 1000, -1000, 1, -1000, 1000, 1, -1000, -1000, 1, 1000, 1000, -1, 1000, -1000, -1, -1000, 1000, -1, -1000, -1000, -1, 1000, 1000, 1, 1000, -1000, -1, 1000, -1000, 1, 1000, 1000, -1, 1000, 1000, 1, -1000, -1000, -1, -1000, -1000, 1, -1000, 1000, -1, -1000 )
+
+[sub_resource type="CubeMesh" id=4]
+size = Vector3( 1, 1, 100 )
+
+[sub_resource type="ConvexPolygonShape" id=5]
+points = PoolVector3Array( -0.5, 0.5, 50, 0.5, 0.5, -50, 0.5, 0.5, 50, -0.5, 0.5, -50, -0.5, -0.5, 50, 0.5, -0.5, -50, 0.5, -0.5, 50, -0.5, -0.5, -50, 0.5, 0.5, 50, -0.5, 0.5, -50, 0.5, 0.5, -50, -0.5, 0.5, 50, 0.5, -0.5, 50, -0.5, -0.5, -50, 0.5, -0.5, -50, -0.5, -0.5, 50, 0.5, 0.5, 50, -0.5, -0.5, 50, -0.5, 0.5, 50, 0.5, -0.5, 50, 0.5, 0.5, -50, -0.5, -0.5, -50, -0.5, 0.5, -50, 0.5, -0.5, -50 )
+
+[node name="DebugMap" type="Spatial"]
+
+[node name="StaticBody" type="StaticBody" parent="."]
+
+[node name="MeshInstance" type="MeshInstance" parent="StaticBody"]
+mesh = SubResource( 2 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
+shape = SubResource( 3 )
+
+[node name="Car" parent="." instance=ExtResource( 2 )]
+
+[node name="StaticBody2" type="StaticBody" parent="."]
+
+[node name="MeshInstance" type="MeshInstance" parent="StaticBody2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.72675, 1.50077, 0 )
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.72675, 1.50077, 0 )
+shape = SubResource( 5 )

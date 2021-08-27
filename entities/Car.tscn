@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://entities/Car.gd" type="Script" id=1]
+
+[sub_resource type="CubeMesh" id=1]
+size = Vector3( 2, 1, 5 )
+
+[sub_resource type="ConvexPolygonShape" id=2]
+points = PoolVector3Array( -1, 0.5, 2.5, 1, 0.5, -2.5, 1, 0.5, 2.5, -1, 0.5, -2.5, -1, -0.5, 2.5, 1, -0.5, -2.5, 1, -0.5, 2.5, -1, -0.5, -2.5, 1, 0.5, 2.5, -1, 0.5, -2.5, 1, 0.5, -2.5, -1, 0.5, 2.5, 1, -0.5, 2.5, -1, -0.5, -2.5, 1, -0.5, -2.5, -1, -0.5, 2.5, 1, 0.5, 2.5, -1, -0.5, 2.5, -1, 0.5, 2.5, 1, -0.5, 2.5, 1, 0.5, -2.5, -1, -0.5, -2.5, -1, 0.5, -2.5, 1, -0.5, -2.5 )
+
+[node name="Car" type="KinematicBody"]
+script = ExtResource( 1 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.9367, 0 )
+mesh = SubResource( 1 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.9367, 0 )
+shape = SubResource( 2 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, -8.99794e-09, 1.21004e-07, -2.26267e-08, 0.965926, 0.258819, -1.19209e-07, -0.258819, 0.965926, 0, 5.83976, 8.60099 )
