@@ -9,7 +9,7 @@ func _input(event):
 
 func shoot():
 	var randomCarPosition = -GLOBAL.get_random_car().global_transform.origin.direction_to(shootPoint.global_transform.origin)
-	var bullet = usedBullet.instance().set_speed(1000) \
+	var bullet = usedBullet.instance().set_speed(5) \
 		.set_bullet_direction(randomCarPosition) \
 		.set_start(shootPoint.global_transform.origin)
 	get_tree().get_root().call_deferred("add_child", bullet)

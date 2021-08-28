@@ -143,8 +143,11 @@ func getHit(hitDirection):
 func check_collision_with_cars():
 	for i in get_slide_count():
 		var collision: KinematicCollision = get_slide_collision(i)
+		print(collision.collider.name)
 		if "Car" in collision.collider.name:
 			collision.collider.getHit(-collision.normal * self.velocity.length() * 2)
+		elif "Bullet" in collision.collider.name:
+			pass
 
 func _on_AiRefreshPathTimer_timeout():
 	if !is_player:

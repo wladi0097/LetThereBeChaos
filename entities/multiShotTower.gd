@@ -17,7 +17,7 @@ func shoot():
 	shootDirection(shootPoint4, Vector3(0, 0, 1))
 	
 func shootDirection(shootPoint, direction):
-	var bullet = usedBullet.instance().set_speed(500) \
+	var bullet = usedBullet.instance().set_speed(5) \
 		.set_bullet_direction(direction) \
 		.set_start(shootPoint.global_transform.origin)
 	get_tree().get_root().call_deferred("add_child", bullet)
