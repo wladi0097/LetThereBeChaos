@@ -18,7 +18,7 @@ class TowerData:
 		self.Ressource = _towerRessource
 		self.Label = _towerLabel
 		self.Count = _count
-		self.Label.text = "Tower Left: %d" % self.Count
+		self.Label.text = "Left: %d" % self.Count
 
 const Tower = {
 	INVALID = -1,
@@ -53,7 +53,7 @@ func placeTower(towerData: TowerData, location: Vector3):
 	hasSelectedTowerPosition = false
 	messageLabel.text = ""
 	towerData.Count -= 1;
-	towerData.Label.text = "Tower Left: %d" % towerData.Count
+	towerData.Label.text = "Left: %d" % towerData.Count
 	
 
 func _on_placeTowerButton_pressed(towerID):
