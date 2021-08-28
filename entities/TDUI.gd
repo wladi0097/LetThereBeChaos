@@ -28,9 +28,9 @@ const Tower = {
 }
 
 onready var TowerDict = {
-	Tower.Base     : TowerData.new( baseTower     , 40, get_node("PanelContainer/VBoxContainer/BaseTowerLabel")  ),
+	Tower.Base     : TowerData.new( baseTower     , 3, get_node("PanelContainer/VBoxContainer/BaseTowerLabel")  ),
 	Tower.MultiShot: TowerData.new( multiShotTower, 3, get_node("PanelContainer/VBoxContainer/MultiTowerLabel") ),
-	Tower.Spike    : TowerData.new( spikeTower    , 6, get_node("PanelContainer/VBoxContainer/SpikeTowerLabel") ),
+	Tower.Spike    : TowerData.new( spikeTower    , 3, get_node("PanelContainer/VBoxContainer/SpikeTowerLabel") ),
 }
 
 func getTower(var towerID : int) -> TowerData:
@@ -83,3 +83,7 @@ func _physics_process(delta):
 		return
 	
 	placeTower(getTower(towerIdToBePlaced), rayCast.get_collision_point())
+
+
+func _on_StartButton_button_down():
+	GLOBAL.switch_to_race()

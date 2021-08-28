@@ -4,7 +4,7 @@ class_name Car
 export var use_camera_at_spawn = false
 export var is_player = false
 export var gravity = -20.0
-export var wheel_base = 1.5
+export var wheel_base = 1.2
 export var steering_limit = 10.0
 export var engine_power = 12.0
 export var braking = -9.0

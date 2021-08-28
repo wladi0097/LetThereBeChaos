@@ -4,7 +4,7 @@ extends Spatial
 onready var followCamera: Camera = $TopDown/TopDownCamera;
 var playerCamera: Camera
 var doTransition = false
-var position_in_race := 0
+var position_in_race := 1
 
 func _ready():
 	playerCamera = GLOBAL.player.camera

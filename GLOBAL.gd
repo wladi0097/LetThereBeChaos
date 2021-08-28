@@ -10,3 +10,6 @@ func _ready():
 
 func get_random_car() -> KinematicBody:
 	return cars[rng.randi_range(0, cars.size() -1)]
+
+func switch_to_race():
+	pass
