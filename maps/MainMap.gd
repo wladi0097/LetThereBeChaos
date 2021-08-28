@@ -4,6 +4,7 @@ extends Spatial
 onready var followCamera: Camera = $TopDown/TopDownCamera;
 var playerCamera: Camera
 var doTransition = false
+var position_in_race := 0
 
 func _ready():
 	playerCamera = GLOBAL.player.camera
@@ -32,3 +33,11 @@ func transition():
 	
 	if doTransition:
 		followCamera.global_transform.origin = lerp(followCamera.global_transform.origin, playerCamera.global_transform.origin, 0.01)
+
+
+func _on_FinishLine_body_entered(body):
+	if "enemy" in body.name:
+		position_in_race += 1
+	if "Player" in body.name:
+		$Finish/VBoxContainer/PositionInRace.text = "Position in race: " + String(position_in_race)
+		$Finish.show()
