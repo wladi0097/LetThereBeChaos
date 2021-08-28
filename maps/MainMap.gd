@@ -7,6 +7,7 @@ var doTransition = false
 
 func _ready():
 	playerCamera = GLOBAL.player.camera
+	GLOBAL.road = get_node("World/road/StaticBody")
 	
 func _input(event):
 	if event.is_action_pressed("debug3"):

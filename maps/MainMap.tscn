@@ -208,6 +208,7 @@ shape = SubResource( 3 )
 [node name="road" parent="World" instance=ExtResource( 1 )]
 
 [node name="StaticBody" type="StaticBody" parent="World/road"]
+collision_layer = 1025
 
 [node name="CollisionShape" type="CollisionShape" parent="World/road/StaticBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -43.7693, 35.0731, -21.5458 )

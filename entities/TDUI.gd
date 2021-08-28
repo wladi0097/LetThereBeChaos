@@ -77,5 +77,9 @@ func _physics_process(delta):
 	if !rayCast.is_colliding() || "Area" in rayCast.get_collider().name:
 		messageLabel.text = "Invalid location!"
 		return
-	print(rayCast.get_collider().name)
+
+	if towerIdToBePlaced != Tower.Spike && rayCast.get_collider() == GLOBAL.road:
+		messageLabel.text = "Invalid location!"
+		return
+	
 	placeTower(getTower(towerIdToBePlaced), rayCast.get_collision_point())
