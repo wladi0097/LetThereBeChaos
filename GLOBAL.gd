@@ -2,6 +2,7 @@ extends Node
 
 var cars = []
 var player = null
+var road = null
 var rng = RandomNumberGenerator.new()
 
 func _ready():
