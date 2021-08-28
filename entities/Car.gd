@@ -1,11 +1,12 @@
 extends KinematicBody
 class_name Car
 
+export var use_camera_at_spawn = false
 export var is_player = false
 export var gravity = -20.0
 export var wheel_base = 1.5
 export var steering_limit = 10.0
-export var engine_power = 6.0
+export var engine_power = 12.0
 export var braking = -9.0
 export var friction = -2.0
 export var drag = -2.0
@@ -31,6 +32,7 @@ func _ready():
 	GLOBAL.cars.append(self)
 	if is_player:
 		GLOBAL.player = self
+	if use_camera_at_spawn:
 		camera.current = true
 
 func _physics_process(delta):
