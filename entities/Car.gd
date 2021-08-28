@@ -26,8 +26,10 @@ onready var camera = $Camera
 onready var nav = get_parent()
 onready var playerChar = get_parent().get_node("Car")
 
-func _ready():	
+func _ready():
+	GLOBAL.cars.append(self)
 	if is_player:
+		GLOBAL.player = self
 		camera.current = true
 
 func _physics_process(delta):
@@ -103,7 +105,6 @@ func get_api_input():
 	# follow path turn
 	if turn == 0:
 		var turnDirection = ai_path[0].angle_to(self.global_transform.origin) 
-		print(turnDirection * (180 / PI))
 		
 #		if turnDirection < 0.1 || turnDirection > 6.2: # follow
 #			print('follow')
