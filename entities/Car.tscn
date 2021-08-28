@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://entities/Car.gd" type="Script" id=1]
 [ext_resource path="res://models/car.glb" type="PackedScene" id=2]
@@ -8,6 +8,11 @@ size = Vector3( 2, 1, 5 )
 
 [sub_resource type="ConvexPolygonShape" id=2]
 points = PoolVector3Array( -1, 0.5, 2.5, 1, 0.5, -2.5, 1, 0.5, 2.5, -1, 0.5, -2.5, -1, -0.5, 2.5, 1, -0.5, -2.5, 1, -0.5, 2.5, -1, -0.5, -2.5, 1, 0.5, 2.5, -1, 0.5, -2.5, 1, 0.5, -2.5, -1, 0.5, 2.5, 1, -0.5, 2.5, -1, -0.5, -2.5, 1, -0.5, -2.5, -1, -0.5, 2.5, 1, 0.5, 2.5, -1, -0.5, 2.5, -1, 0.5, 2.5, 1, -0.5, 2.5, 1, 0.5, -2.5, -1, -0.5, -2.5, -1, 0.5, -2.5, 1, -0.5, -2.5 )
+
+[sub_resource type="SphereShape" id=4]
+
+[sub_resource type="CapsuleMesh" id=3]
+radial_segments = 8
 
 [node name="Car" type="KinematicBody" groups=[
 "interactWithHit",
@@ -24,8 +29,13 @@ material/0 = null
 transform = Transform( 1, 0, 0, 0, 1.62754, 0, 0, 0, 1, 0, 0.869007, 0 )
 shape = SubResource( 2 )
 
+[node name="CollisionShape2" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.526595, -3.3331 )
+shape = SubResource( 4 )
+
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.927184, 0.374607, 0, -0.374607, 0.927184, 0, 3, 6 )
+far = 200.0
 
 [node name="car" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.71389, 0 )
@@ -45,18 +55,23 @@ cast_to = Vector3( 0, -0.4, 0 )
 [node name="aiCheck" type="Spatial" parent="."]
 
 [node name="right" type="RayCast" parent="aiCheck"]
-transform = Transform( 0.34202, 0, 0.939693, 0, 1, 0, -0.939693, 0, 0.34202, 0.670537, 0.58497, -2.30547 )
+transform = Transform( 0.766045, 0, 0.642788, 0, 1, 0, -0.642788, 0, 0.766045, 0.670537, 0.58497, -2.30547 )
 enabled = true
-cast_to = Vector3( 6, 0, 0 )
+cast_to = Vector3( 3, 0, 0 )
 
 [node name="left" type="RayCast" parent="aiCheck"]
-transform = Transform( -0.422618, 0, 0.906308, 0, 1, 0, -0.906308, 0, -0.422618, -0.756718, 0.58497, -2.30547 )
+transform = Transform( -0.766045, 0, 0.642788, 0, 1, 0, -0.642788, 0, -0.766045, -0.756718, 0.58497, -2.30547 )
 enabled = true
-cast_to = Vector3( 6, 0, 0 )
+cast_to = Vector3( 3, 0, 0 )
 
 [node name="AiRefreshPathTimer" type="Timer" parent="aiCheck"]
+wait_time = 0.1
 autostart = true
 
 [node name="Node" type="Node" parent="."]
+
+[node name="testShape" type="MeshInstance" parent="."]
+mesh = SubResource( 3 )
+material/0 = null
 
 [connection signal="timeout" from="aiCheck/AiRefreshPathTimer" to="." method="_on_AiRefreshPathTimer_timeout"]

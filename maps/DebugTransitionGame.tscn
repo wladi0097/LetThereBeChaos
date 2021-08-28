@@ -4,12 +4,12 @@
 [ext_resource path="res://entities/Car.tscn" type="PackedScene" id=2]
 [ext_resource path="res://maps/DebugTransitionGame.gd" type="Script" id=3]
 
-[sub_resource type="SpatialMaterial" id=2]
+[sub_resource type="SpatialMaterial" id=1]
 albedo_texture = ExtResource( 1 )
 uv1_triplanar = true
 
-[sub_resource type="CubeMesh" id=1]
-material = SubResource( 2 )
+[sub_resource type="CubeMesh" id=2]
+material = SubResource( 1 )
 size = Vector3( 200, 1, 200 )
 
 [sub_resource type="ConvexPolygonShape" id=3]
@@ -19,7 +19,7 @@ points = PoolVector3Array( -100, 0.5, 100, 100, 0.5, -100, 100, 0.5, 100, -100, 
 script = ExtResource( 3 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
-mesh = SubResource( 1 )
+mesh = SubResource( 2 )
 material/0 = null
 
 [node name="StaticBody" type="StaticBody" parent="MeshInstance"]

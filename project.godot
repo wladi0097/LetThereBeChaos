@@ -21,7 +21,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Let there be chaos"
-run/main_scene="res://maps/DebugMap.tscn"
+run/main_scene="res://maps/MainMap.tscn"
 config/icon="res://icon.png"
 
 [autoload]

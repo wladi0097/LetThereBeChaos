@@ -26,7 +26,7 @@ onready var pivitFront = $pivit/FrontRay
 onready var pivitRear = $pivit/RearRay
 onready var camera = $Camera
 onready var nav = get_parent()
-onready var playerChar = get_parent().get_node("Car")
+onready var finish_line = get_parent().get_node("Finish")
 
 func _ready():
 	GLOBAL.cars.append(self)
@@ -106,14 +106,42 @@ func get_api_input():
 	var turn = 0
 	
 	# panik turn
-	if $aiCheck/left.is_colliding():
+	if $aiCheck/left.is_colliding() && !$aiCheck/right.is_colliding():
 		turn = -1
 	elif $aiCheck/right.is_colliding():
 		turn = 1
 	
 	# follow path turn
 	if turn == 0:
-		var turnDirection = ai_path[0].angle_to(self.global_transform.origin) 
+		var aiPath2D = Vector2(ai_path[0].x, ai_path[0].y)
+		var ownPath2D =  Vector2(self.global_transform.origin.x, self.global_transform.origin.y)
+		var turnDirection = aiPath2D.normalized().angle_to(ownPath2D.normalized())
+		
+		if use_camera_at_spawn:
+			$testShape.global_transform.origin = ai_path[0]
+			print(aiPath2D, ownPath2D)
+#			var dotProduct = aiPath2D.dot(ownPath2D.normalized())
+#
+#			if dotProduct > 140 && dotProduct < 240:
+#				print('forwards')
+#				pass
+#			elif dotProduct < 180:
+#				print('right')
+#				turn = -1
+#			else:
+#				print('left')
+#				turn = 1
+
+#			if turnDirection < 0 || turnDirection >= 60 || turnDirection <= 120:
+#				turn == 0
+#				print('forwards')
+#				pass
+#			elif turnDirection < 60:
+#				print('right')
+#				turn = -1
+#			elif turnDirection > 120:
+#				print('left')
+#				turn = 1
 		
 #		if turnDirection < 0.1 || turnDirection > 6.2: # follow
 #			print('follow')
@@ -159,5 +187,7 @@ func check_collision_with_cars():
 
 func _on_AiRefreshPathTimer_timeout():
 	if !is_player:
-		ai_path = nav.get_simple_path(global_transform.origin, playerChar.global_transform.origin)
+		pass
+		ai_path = nav.get_simple_path(global_transform.origin, finish_line.global_transform.origin)
+		ai_path.remove(0)
 		ai_path.remove(0)

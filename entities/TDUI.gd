@@ -4,7 +4,7 @@ onready var baseTower : PackedScene = preload("res://entities/basicTower.tscn")
 onready var multiShotTower : PackedScene = preload("res://entities/multiShotTower.tscn")
 onready var spikeTower : PackedScene = preload("res://entities/spikeTower.tscn")
 onready var rayCast : RayCast = $placementRayCast
-onready var camera : Camera = $Camera
+onready var camera : Camera = get_parent().get_node("TopDownCamera")
 onready var messageLabel : Label = $CenterContainer/MessageLabel
 
 var hasSelectedTowerPosition = false
@@ -64,7 +64,7 @@ func _on_placeTowerButton_pressed(towerID):
 
 func _input(event):
 	if event is InputEventMouseButton && towerIdToBePlaced != Tower.INVALID:
-		var ray_length = 100
+		var ray_length = 1000
 		rayCast.transform.origin = camera.project_ray_origin(event.position)
 		rayCast.cast_to = rayCast.transform.origin + camera.project_ray_normal(event.position) * ray_length
 		hasSelectedTowerPosition = true
@@ -72,6 +72,9 @@ func _input(event):
 func _physics_process(delta):
 	if !hasSelectedTowerPosition || towerIdToBePlaced == Tower.INVALID:
 		return
+		
+	if rayCast.is_colliding():
+		print(rayCast.get_collider().name)
 
 	if !rayCast.is_colliding() || "Area" in rayCast.get_collider().name:
 		messageLabel.text = "Invalid location!"
