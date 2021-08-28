@@ -2,7 +2,7 @@ extends KinematicBody
 class_name Car
 
 export var is_player = false
-export var gravity = -10.0
+export var gravity = -20.0
 export var wheel_base = 1.5
 export var steering_limit = 10.0
 export var engine_power = 6.0
@@ -19,6 +19,7 @@ var acceleration = Vector3.ZERO
 var velocity = Vector3.ZERO 
 var steer_angle = 0.0
 var ai_path = [Vector3()]
+var current_speed = 0
 
 onready var pivitFront = $pivit/FrontRay
 onready var pivitRear = $pivit/RearRay
@@ -41,7 +42,12 @@ func _physics_process(delta):
 	apply_acceleration(delta)
 	
 	move_with_velocity()
-#	orient_car_to_floor()
+	orient_car_to_floor()
+	camera_fov()
+
+func camera_fov():
+	if is_player:
+		camera.fov = lerp(camera.fov, 60 + current_speed * 2.5, .1) 
 
 func orient_car_to_floor():
 	if pivitFront.is_colliding() or pivitRear.is_colliding():
@@ -54,6 +60,7 @@ func orient_car_to_floor():
 func move_with_velocity():
 	velocity = move_and_slide_with_snap(velocity, -transform.basis.y, Vector3.UP, true, 4,  0.785398, false)
 	check_collision_with_cars()
+	current_speed = Vector2(velocity.x, velocity.z).length()
 
 func apply_acceleration(delta):
 	acceleration.y = gravity
@@ -116,8 +123,8 @@ func get_api_input():
 #			print('right')
 #			turn = -1
 
-#	acceleration =  -transform.basis.z * engine_power
-#	steer_angle = turn * deg2rad(steering_limit)
+	acceleration =  -transform.basis.z * engine_power
+	steer_angle = turn * deg2rad(steering_limit)
 
 func get_player_input():
 	var turn = Input.get_action_strength("steer_left")
@@ -143,9 +150,8 @@ func getHit(hitDirection):
 func check_collision_with_cars():
 	for i in get_slide_count():
 		var collision: KinematicCollision = get_slide_collision(i)
-		print(collision.collider.name)
 		if "Car" in collision.collider.name:
-			collision.collider.getHit(-collision.normal * self.velocity.length() * 2)
+			collision.collider.getHit(-collision.normal * self.current_speed * 2)
 		elif "Bullet" in collision.collider.name:
 			pass
 
