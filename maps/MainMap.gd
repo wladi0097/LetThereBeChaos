@@ -20,7 +20,6 @@ func _physics_process(delta):
 
 func transition():
 	var length = playerCamera.global_transform.origin.distance_to(followCamera.global_transform.origin)
-	print(length)
 	var speed = 0.01
 	
 	if length < 10:
