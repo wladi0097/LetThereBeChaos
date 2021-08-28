@@ -8,6 +8,16 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "KinematicBody",
+"class": "Car",
+"language": "GDScript",
+"path": "res://entities/Car.gd"
+} ]
+_global_script_class_icons={
+"Car": ""
+}
+
 [application]
 
 config/name="Let there be chaos"
