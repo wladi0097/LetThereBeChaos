@@ -28,7 +28,7 @@ const Tower = {
 }
 
 onready var TowerDict = {
-	Tower.Base     : TowerData.new( baseTower     , 4, get_node("PanelContainer/VBoxContainer/BaseTowerLabel")  ),
+	Tower.Base     : TowerData.new( baseTower     , 40, get_node("PanelContainer/VBoxContainer/BaseTowerLabel")  ),
 	Tower.MultiShot: TowerData.new( multiShotTower, 3, get_node("PanelContainer/VBoxContainer/MultiTowerLabel") ),
 	Tower.Spike    : TowerData.new( spikeTower    , 6, get_node("PanelContainer/VBoxContainer/SpikeTowerLabel") ),
 }
@@ -45,14 +45,11 @@ func placeTower(towerData: TowerData, location: Vector3):
 		hasSelectedTowerPosition = false
 		return
 	
-#	var spaceState : PhysicsDirectSpaceState = get_parent().get_world().direct_space_state
-#	var collidingShapes = spaceState.collide_shape()
-	
 	var tower = towerData.Ressource.instance()
 	tower.transform.origin = location
 	get_tree().get_root().add_child(tower)
 
-	towerIdToBePlaced = Tower.INVALID
+	#towerIdToBePlaced = Tower.INVALID
 	hasSelectedTowerPosition = false
 	messageLabel.text = ""
 	towerData.Count -= 1;
@@ -61,26 +58,24 @@ func placeTower(towerData: TowerData, location: Vector3):
 
 func _on_placeTowerButton_pressed(towerID):
 	towerIdToBePlaced = towerID
+	
+func prepareRayCast():
+	var ray_length = 1000
+	var position2D = get_global_mouse_position()
+	rayCast.transform.origin = camera.project_ray_origin(position2D)
+	rayCast.cast_to = camera.project_ray_normal(position2D) * ray_length
 
 func _input(event):
-	if event is InputEventMouseButton && towerIdToBePlaced != Tower.INVALID:
-		var ray_length = 1000
-		rayCast.transform.origin = camera.project_ray_origin(event.position)
-		rayCast.cast_to = rayCast.transform.origin + camera.project_ray_normal(event.position) * ray_length
+	if event.is_action_pressed("left_click") && towerIdToBePlaced != Tower.INVALID:
+		prepareRayCast()
 		hasSelectedTowerPosition = true
 
 func _physics_process(delta):
 	if !hasSelectedTowerPosition || towerIdToBePlaced == Tower.INVALID:
 		return
-		
-	if rayCast.is_colliding():
-		print(rayCast.get_collider().name)
 
 	if !rayCast.is_colliding() || "Area" in rayCast.get_collider().name:
 		messageLabel.text = "Invalid location!"
 		return
-
+	print(rayCast.get_collider().name)
 	placeTower(getTower(towerIdToBePlaced), rayCast.get_collision_point())
-
-func isValidTowerPlacement(placementVec: Vector3) -> bool:
-	return true
