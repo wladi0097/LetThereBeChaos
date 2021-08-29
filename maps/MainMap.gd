@@ -36,6 +36,7 @@ func transition():
 		followCamera.current = false
 		playerCamera.current = true
 		GLOBAL.unpause_cars()
+		GLOBAL.unpause_towers()
 	
 	if doTransition:
 		followCamera.global_transform.origin = lerp(followCamera.global_transform.origin, playerCamera.global_transform.origin, 0.01)

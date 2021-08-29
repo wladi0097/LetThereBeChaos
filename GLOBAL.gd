@@ -20,6 +20,10 @@ func disable_tower_ui():
 func unpause_cars():
 	for car in cars:
 		car.paused = false
+		
+func unpause_towers():
+	for tower in towers:
+		tower.paused = false
 
 func switch_to_race():
 	disable_tower_ui()

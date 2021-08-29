@@ -1,5 +1,6 @@
 extends Spatial
 
+export var paused = true
 onready var usedBullet: PackedScene = preload("res://entities/Bullet.tscn")
 onready var shootPoint1 = $ShootPoint1
 onready var shootPoint2 = $ShootPoint2
@@ -24,3 +25,8 @@ func shootDirection(shootPoint, direction):
 		.set_bullet_direction(direction) \
 		.set_start(shootPoint.global_transform.origin)
 	get_tree().get_root().call_deferred("add_child", bullet)
+
+
+func _on_Timer_timeout():
+	if !paused:
+		shoot()
