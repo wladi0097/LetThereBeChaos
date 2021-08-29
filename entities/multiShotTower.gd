@@ -6,6 +6,9 @@ onready var shootPoint2 = $ShootPoint2
 onready var shootPoint3 = $ShootPoint3
 onready var shootPoint4 = $ShootPoint4
 
+func _ready():
+	GLOBAL.towers.append(self)
+
 func _input(event):
 	if event.is_action_pressed("debug2"):
 		shoot()

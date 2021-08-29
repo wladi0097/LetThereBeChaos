@@ -8,12 +8,16 @@ var position_in_race := 1
 
 func _ready():
 	playerCamera = GLOBAL.player.camera
+	GLOBAL.currentMap = self
 	GLOBAL.road = get_node("World/road/StaticBody")
 	
 func _input(event):
 	if event.is_action_pressed("debug3"):
 		$TopDown/MarginContainer.visible = false
 		doTransition = true
+		
+func transition_to_car_camera():
+	doTransition = true
 
 func _physics_process(delta):
 	if doTransition:
@@ -31,6 +35,7 @@ func transition():
 		doTransition = false
 		followCamera.current = false
 		playerCamera.current = true
+		GLOBAL.unpause_cars()
 	
 	if doTransition:
 		followCamera.global_transform.origin = lerp(followCamera.global_transform.origin, playerCamera.global_transform.origin, 0.01)

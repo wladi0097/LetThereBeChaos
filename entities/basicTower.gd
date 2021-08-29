@@ -3,6 +3,9 @@ extends Spatial
 onready var usedBullet: PackedScene = preload("res://entities/Bullet.tscn")
 onready var shootPoint = $ShootPoint
 
+func _ready():
+	GLOBAL.towers.append(self)
+
 func _input(event):
 	if event.is_action_pressed("debug1"):
 		shoot()

@@ -1,6 +1,7 @@
 extends KinematicBody
 class_name Car
 
+export var paused = true
 export var use_camera_at_spawn = false
 export var is_player = false
 export var gravity = -20.0
@@ -95,6 +96,9 @@ func calculate_steering(delta):
 	look_at(transform.origin + new_heading, transform.basis.y)
 	
 func get_input():
+	if paused:
+		return
+
 	if is_player:
 		get_player_input()
 	else:

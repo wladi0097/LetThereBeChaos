@@ -95,4 +95,5 @@ func _physics_process(delta):
 		startButton.disabled = false
 
 func _on_StartButton_button_down():
+	visible = false
 	GLOBAL.switch_to_race()
