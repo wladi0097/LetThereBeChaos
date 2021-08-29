@@ -41,7 +41,7 @@ func getTower(var towerID : int) -> TowerData:
 
 func placeTower(towerData: TowerData, location: Vector3):
 	if towerData.Count <= 0:
-		messageLabel.text = "No more towers!"
+		messageLabel.text = "No more selected Towers left!"
 		towerIdToBePlaced = Tower.INVALID
 		hasSelectedTowerPosition = false
 		return
@@ -82,12 +82,16 @@ func _physics_process(delta):
 	if !hasSelectedTowerPosition || towerIdToBePlaced == Tower.INVALID:
 		return
 
-	if !rayCast.is_colliding() || "Area" in rayCast.get_collider().name:
-		messageLabel.text = "Invalid location!"
+	if !rayCast.is_colliding():
+		messageLabel.text = "Invalid location! Tower must be placed on the map!"
+		return
+		
+	if "Area" in rayCast.get_collider().name:
+		messageLabel.text = "Invalid location! Tower place already occupied!"
 		return
 
 	if towerIdToBePlaced != Tower.Spike && rayCast.get_collider() == GLOBAL.road:
-		messageLabel.text = "Invalid location!"
+		messageLabel.text = "Invalid location! Only Spikes can be placed on the road!"
 		return
 	
 	placeTower(getTower(towerIdToBePlaced), rayCast.get_collision_point())
