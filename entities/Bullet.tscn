@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://entities/Bullet.gd" type="Script" id=1]
+[ext_resource path="res://models/Material_001.material" type="Material" id=2]
 
 [sub_resource type="SphereShape" id=1]
 radius = 1.99511
@@ -21,4 +22,4 @@ shape = SubResource( 1 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 mesh = SubResource( 2 )
-material/0 = null
+material/0 = ExtResource( 2 )

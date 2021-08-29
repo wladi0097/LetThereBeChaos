@@ -12,6 +12,8 @@ func _ready():
 	GLOBAL.road = get_node("World/road/StaticBody")
 	
 func _input(event):
+	if event.is_action_pressed("debug1"):
+		GLOBAL.unpause_cars()
 	if event.is_action_pressed("debug3"):
 		$TopDown/MarginContainer.visible = false
 		doTransition = true

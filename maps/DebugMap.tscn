@@ -201,6 +201,7 @@ transform = Transform( 0.670271, 0, 0.742116, 0, 1, 0, -0.742116, 0, 0.670271, 1
 
 [node name="Car" parent="Navigation" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.46699, 1.16787, 41.0939 )
+paused = false
 use_camera_at_spawn = true
 is_player = true
 
