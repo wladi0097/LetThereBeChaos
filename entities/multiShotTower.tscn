@@ -45,8 +45,4 @@ material/0 = SubResource( 3 )
 wait_time = 2.0
 autostart = true
 
-[node name="Camera" type="Camera" parent="."]
-transform = Transform( -0.690504, 0.203814, -0.694021, 0, 0.959481, 0.281772, 0.723329, 0.194565, -0.662525, -64.7603, 55.689, -54.0669 )
-current = true
-
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
