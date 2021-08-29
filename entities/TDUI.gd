@@ -6,6 +6,7 @@ onready var spikeTower : PackedScene = preload("res://entities/spikeTower.tscn")
 onready var rayCast : RayCast = $placementRayCast
 onready var camera : Camera = get_parent().get_node("TopDownCamera")
 onready var messageLabel : Label = $CenterContainer/MessageLabel
+onready var startButton : Button = $CenterContainer2/VBoxContainer/StartButton
 
 var hasSelectedTowerPosition = false
 var towerIdToBePlaced : int = Tower.INVALID
@@ -65,6 +66,13 @@ func prepareRayCast():
 	rayCast.transform.origin = camera.project_ray_origin(position2D)
 	rayCast.cast_to = camera.project_ray_normal(position2D) * ray_length
 
+func haveAllTowersBeenPlaced() -> bool:
+	for towerDictEntry in TowerDict:
+		var towerData =  TowerDict[towerDictEntry]
+		if towerData.Count > 0:
+			return false
+	return true
+
 func _input(event):
 	if event.is_action_pressed("left_click") && towerIdToBePlaced != Tower.INVALID:
 		prepareRayCast()
@@ -83,7 +91,8 @@ func _physics_process(delta):
 		return
 	
 	placeTower(getTower(towerIdToBePlaced), rayCast.get_collision_point())
-
+	if haveAllTowersBeenPlaced():
+		startButton.disabled = false
 
 func _on_StartButton_button_down():
 	GLOBAL.switch_to_race()
