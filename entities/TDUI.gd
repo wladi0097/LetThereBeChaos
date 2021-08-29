@@ -29,8 +29,8 @@ const Tower = {
 }
 
 onready var TowerDict = {
-	Tower.Base     : TowerData.new( baseTower     , 3, get_node("PanelContainer/VBoxContainer/BaseTowerLabel")  ),
-	Tower.MultiShot: TowerData.new( multiShotTower, 3, get_node("PanelContainer/VBoxContainer/MultiTowerLabel") ),
+	Tower.Base     : TowerData.new( baseTower     , 6, get_node("PanelContainer/VBoxContainer/BaseTowerLabel")  ),
+	Tower.MultiShot: TowerData.new( multiShotTower, 4, get_node("PanelContainer/VBoxContainer/MultiTowerLabel") ),
 	Tower.Spike    : TowerData.new( spikeTower    , 3, get_node("PanelContainer/VBoxContainer/SpikeTowerLabel") ),
 }
 
