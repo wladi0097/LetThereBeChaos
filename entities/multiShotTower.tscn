@@ -1,7 +1,16 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://entities/multiShotTower.gd" type="Script" id=1]
 [ext_resource path="res://models/multiShotTower.glb" type="PackedScene" id=2]
+
+[sub_resource type="SphereShape" id=1]
+
+[sub_resource type="SphereMesh" id=2]
+
+[sub_resource type="SpatialMaterial" id=3]
+flags_transparent = true
+flags_unshaded = true
+albedo_color = Color( 0.333333, 0, 0, 0.258824 )
 
 [node name="Spatial" type="Spatial"]
 script = ExtResource( 1 )
@@ -19,3 +28,15 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00836658, 20.9794, -21.4373 
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00836658, 21.2286, 20.5596 )
 
 [node name="multiShotTower" parent="." instance=ExtResource( 2 )]
+
+[node name="Area" type="Area" parent="."]
+collision_layer = 1024
+
+[node name="CollisionShape" type="CollisionShape" parent="Area"]
+transform = Transform( 60, 0, 0, 0, 60, 0, 0, 0, 60, 0, 0, 0 )
+shape = SubResource( 1 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Area"]
+transform = Transform( 60, 0, 0, 0, 60, 0, 0, 0, 60, 0, 0, 0 )
+mesh = SubResource( 2 )
+material/0 = SubResource( 3 )
